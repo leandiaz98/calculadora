@@ -1,0 +1,134 @@
+DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-image: url("https://as2.ftcdn.net/v2/jpg/00/22/66/33/500_F_22663380_8P6wO0SCQKPDiA36By9723h6d5RFl2Mj.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+    #calculator {
+      height: 529px;
+      width: 446px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #011126;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input {
+      width: 98%;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 18px;
+      font-style: italic;
+      font-family: fantasy;
+      font-variant-numeric: oldstyle-nums;
+      background-color: #BFAB9F;
+    }
+    button {
+      width: 47%;
+      padding: 10px;
+      font-size: 16px;
+      margin: 5px;
+      cursor: pointer;
+      background-color: #405B73;
+    }
+  </style>
+  <title>Calculadora</title>
+</head>
+<body>
+  <div id="calculator">
+    <input type="text" id="display" readonly>
+    <button onclick="clearDisplay()">C</button>
+    <button onclick="appendCharacter('/')">/</button>
+    <button onclick="appendCharacter('*')">*</button>
+    <button onclick="appendCharacter('7')">7</button>
+    <button onclick="appendCharacter('8')">8</button>
+    <button onclick="appendCharacter('9')">9</button>
+    <button onclick="appendCharacter('-')">-</button>
+    <button onclick="appendCharacter('4')">4</button>
+    <button onclick="appendCharacter('5')">5</button>
+    <button onclick="appendCharacter('6')">6</button>
+    <button onclick="appendCharacter('+')">+</button>
+    <button onclick="appendCharacter('1')">1</button>
+    <button onclick="appendCharacter('2')">2</button>
+    <button onclick="appendCharacter('3')">3</button>
+    <button onclick="calculateResult()">=</button>
+    <button onclick="appendCharacter('0')">0</button>
+    <button onclick="appendCharacter('.')">.</button>
+  </div>
+      <script>
+    document.addEventListener('keydown', function(event) {
+      const key = event.key;
+
+      // Verifica si la tecla presionada es un número o un operador
+      if (!isNaN(key) || ['/', '*', '+', '-', '.', 'Enter'].includes(key)) {
+        event.preventDefault(); // Evita que el evento de tecla afecte a otros elementos de la página
+
+        // Llama a la función correspondiente basada en la tecla presionada
+        switch (key) {
+          case 'Enter':
+            calculateResult();
+            break;
+          case '/':
+          case '*':
+          case '+':
+          case '-':
+          case '.':
+            appendCharacter(key);
+            break;
+          default:
+            appendCharacter(key);
+            break;
+        }
+      } else if (key === 'Escape') {
+        clearDisplay();
+      }
+    });
+    
+    function appendCharacter(char) {
+      document.getElementById('display').value += char;
+    }
+
+    function clearDisplay() {
+      document.getElementById('display').value = '';
+    }
+
+    function calculateResult() {
+      try {
+        const result = eval(document.getElementById('display').value);
+        document.getElementById('display').value = result;
+      } catch (error) {
+        document.getElementById('display').value = 'Error';
+      }
+    }
+  </script>
+  <script>
+    function appendCharacter(char) {
+      document.getElementById('display').value += char;
+    }
+
+    function clearDisplay() {
+      document.getElementById('display').value = '';
+    }
+
+    function calculateResult() {
+      try {
+        const result = eval(document.getElementById('display').value);
+        document.getElementById('display').value = result;
+      } catch (error) {
+        document.getElementById('display').value = 'Error';
+      }
+    }
+  </script>
+</body>
+</html>
